@@ -1,17 +1,23 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
         String separator = File.separator;
 
         String path ="c:"+separator+ "Users"+ separator + "Мирослав" +separator +
                 "Desktop"+ separator + "input.txt";
+        String path2 = "c:"+separator+ "Users"+ separator + "Мирослав" +separator +
+                "Desktop"+ separator + "output.txt";
 
         File file = new File(path);
+        File file2 = new File(path2);
 
         Scanner sc = new Scanner(file);
+        FileWriter fw = new FileWriter(file2,false);
 
         String line = sc.nextLine();
         sc.close();
@@ -26,18 +32,18 @@ public class Main {
                 try {
                     a = Double.valueOf(num);
                 } catch (NumberFormatException e) {
-                    System.out.println("Error! Not number\n");
-                    is = false;
-                    break;
+                    fw.write("Error! Not number\n");
+                    fw.flush();
+                    return;
                 }
             }
             if (m == 3) {
                 try {
                     b = Double.valueOf(num);
                 } catch (NumberFormatException e) {
-                    System.out.println("Error! Not number\n");
-                    is = false;
-                    break;
+                    fw.write("Error! Not number\n");
+                    fw.flush();
+                    return;
                 }
             }
 
@@ -50,31 +56,37 @@ public class Main {
                     try {
                         z = result(num, z);
                     } catch (Exception s) {
-                        System.out.println("Operation Error!");
-                        is = false;
-                        break;
+                        fw.write("Operation Error!");
+                        fw.flush();
+                        return;
                     }
                 }
             }
         }
         if (is) {
             switch (z) {
-                case ('+'):
-                    System.out.println(a + b);
-                    break;
-                case ('-'):
-                    System.out.println(a - b);
-                    break;
-                case ('/'):
+                case ('+') -> {
+                    fw.write(String.valueOf((a + b)));
+                    fw.flush();
+
+                }
+                case ('-') -> {
+                    fw.write(String.valueOf((a - b)));
+                    fw.flush();
+
+                }
+                case ('/') -> {
                     if (b == 0.0) {
-                        System.out.println("Error! Division by zero");
+                        fw.write("Error! Division by zero");
+                        fw.flush();
+
                     } else {
-                        System.out.println(a / b);
+                        fw.write(String.valueOf (a / b));
+                        fw.flush();
+
                     }
-                    break;
-                case ('*'):
-                    System.out.println(a * b);
-                    break;
+                }
+                case ('*') -> fw.write(String.valueOf (a * b));
             }
         }
     }
