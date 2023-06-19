@@ -32,7 +32,7 @@ public class Main {
                 try {
                     a = Double.valueOf(num);
                 } catch (NumberFormatException e) {
-                    fw.write("Error! Not number\n");
+                    fw.write(line+"=Error! Not number\n");
                     fw.flush();
                     return;
                 }
@@ -41,7 +41,7 @@ public class Main {
                 try {
                     b = Double.valueOf(num);
                 } catch (NumberFormatException e) {
-                    fw.write("Error! Not number\n");
+                    fw.write(line+"=Error! Not number\n");
                     fw.flush();
                     return;
                 }
@@ -56,7 +56,7 @@ public class Main {
                     try {
                         z = result(num, z);
                     } catch (Exception s) {
-                        fw.write("Operation Error!");
+                        fw.write(line+"=Operation Error!");
                         fw.flush();
                         return;
                     }
@@ -66,27 +66,27 @@ public class Main {
         if (is) {
             switch (z) {
                 case ('+') -> {
-                    fw.write(String.valueOf((a + b)));
+                    fw.write(line+"="+String.valueOf((a + b)));
                     fw.flush();
 
                 }
                 case ('-') -> {
-                    fw.write(String.valueOf((a - b)));
+                    fw.write(line+"="+String.valueOf((a - b)));
                     fw.flush();
 
                 }
                 case ('/') -> {
                     if (b == 0.0) {
-                        fw.write("Error! Division by zero");
+                        fw.write(line+"=Error! Division by zero");
                         fw.flush();
 
                     } else {
-                        fw.write(String.valueOf (a / b));
+                        fw.write(line+"="+String.valueOf (a / b));
                         fw.flush();
 
                     }
                 }
-                case ('*') -> fw.write(String.valueOf (a * b));
+                case ('*') -> fw.write(line+"="+String.valueOf (a * b));
             }
         }
     }
